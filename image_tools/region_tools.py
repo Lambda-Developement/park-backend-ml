@@ -10,8 +10,12 @@ REGION_FONT_THICKNESS = 2
 REGION_TEXT_MARGIN = 3
 
 
-# Преобразовывает координаты из 2592x1944 версии в 1000x750
 def convert_coordinates(regions: pd.core.frame.DataFrame) -> None:
+    '''
+    Преобразовывает координаты из 2592x1944 версии в 1000x750
+    :param regions: Массив координат парковочных мест
+    :return: None
+    '''
     for i in range(0, regions.shape[0]):
         regions.loc[i, 'X'] = regions['X'][i] * 1000 // 2592
         regions.loc[i, 'W'] = regions['W'][i] * 1000 // 2592
@@ -19,8 +23,13 @@ def convert_coordinates(regions: pd.core.frame.DataFrame) -> None:
         regions.loc[i, 'H'] = regions['H'][i] * 750 // 1944
 
 
-# Возвращает изображение с отображенными регионами
 def display_regions(img: numpy.ndarray, regions: pd.core.frame.DataFrame) -> numpy.ndarray:
+    '''
+    Возвращает изображение с отображенными регионами
+    :param img: Входное изображение
+    :param regions: Массив с координатами парковочных мест
+    :return: Изображение с отображенными на ней парковочными местами
+    '''
     result = img.copy()
     for i in range(0, regions.shape[0]):
         X = regions['X'][i]
@@ -37,8 +46,9 @@ def display_regions(img: numpy.ndarray, regions: pd.core.frame.DataFrame) -> num
 
 # Пример использования
 if __name__ == '__main__':
-    img = image.imread('test_data/image.jpg', cv2.IMREAD_COLOR)
-    regions = pd.read_csv('test_data/coords.csv', sep=';')
+    img = image.imread('../test_data/image.jpg', cv2.IMREAD_COLOR)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    regions = pd.read_csv('../test_data/coords.csv', sep=';')
     # convert_coordinates(regions) # раскоментить если координаты не преобразованы
     new_img = display_regions(img, regions)
     cv2.imwrite('output.jpg', new_img)
