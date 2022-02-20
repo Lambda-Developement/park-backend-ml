@@ -2,8 +2,6 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
-IMAGE_SIZE = (150, 150)
-
 
 def make_model(input_shape, num_classes):
     """
@@ -60,23 +58,30 @@ def make_model(input_shape, num_classes):
     return keras.Model(inputs, outputs)
 
 
-def make_prediction(image: str) -> float:
-    """
-    Определяет, насколько занята парковка по картинке размера IMAGE_SIZE
-    Использовать только для тестов!
-    :param image: путь до картинки размером IMAGE_SIZE(например: "test_img/test_busy_2.jpg")
-    :return: float - чем ближе к 0, тем вероятнее, что парковка занята.
-    """
-    model = make_model(input_shape=IMAGE_SIZE + (3,), num_classes=2)
-    model.load_weights("model_weights.h5")
-    img = keras.preprocessing.image.load_img(
-        image, target_size=IMAGE_SIZE
-    )
-    img_array = keras.preprocessing.image.img_to_array(img)
-    img_array = tf.expand_dims(img_array, 0)
-    predictions = model.predict(img_array)
-    score = predictions[0]
-    return score
+class Classificator:
+    def __init__(self, image_size=(150, 150), model_weights_file: str = "model_weights.h5"):
+        self.image_size = image_size
+        self.model = make_model(input_shape=self.image_size + (3,), num_classes=2)
+        self.model.load_weights(model_weights_file)
+
+    def make_prediction(self, image: str) -> float:
+        """
+        Определяет, насколько занята парковка по картинке размера self.image_size
+        :param image: путь до картинки размером self.image_size(например: "test_img/test_busy_2.jpg")
+        :return: float - чем ближе к 0, тем вероятнее, что парковка занята.
+        """
+        if not self.model:
+            raise Exception("Model not loaded before making prediction.")
+
+        img = keras.preprocessing.image.load_img(
+            image, target_size=self.image_size
+        )
+        img_array = keras.preprocessing.image.img_to_array(img)
+        img_array = tf.expand_dims(img_array, 0)
+        predictions = self.model.predict(img_array)
+        score = predictions[0]
+        return score
 
 
-print(make_prediction("test_img/test_free_2.jpg"))
+classificator = Classificator((150, 150), "model_weights.h5")
+print(classificator.make_prediction("output.jpg"))
