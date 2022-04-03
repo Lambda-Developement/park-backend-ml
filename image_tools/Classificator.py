@@ -8,13 +8,15 @@ from matplotlib import image
 from utility_crop import crop
 from utility_crop import scale
 
-IMG_SIZE = (150,150)
+IMG_SIZE = (150, 150)
 MODEL_WEIGHTS_FILE = "./model_weights.h5"
+
 
 class Classificator:
     def __init__(self, image_size: tuple = IMG_SIZE, model_weights_file: str = "model_weights.h5"):
         self.image_size = image_size
-        self.model = self.make_model(input_shape=self.image_size + (3,), num_classes=2)
+        self.model = self.make_model(
+            input_shape=self.image_size + (3,), num_classes=2)
         self.model.load_weights(model_weights_file)
 
     def make_model(self, input_shape, num_classes):
@@ -55,7 +57,10 @@ class Classificator:
             x = layers.add([x, residual])  # Add back residual
             previous_block_activation = x  # Set aside next residual
 
-        x = layers.SeparableConv2D(1024, 3, padding="same")(x)
+        x = layers.SeparableConv2D(512, 3, padding="same")(x)
+        x = layers.SeparableConv2D(512, 3, padding="same")(x)
+        x = layers.SeparableConv2D(512, 3, padding="same")(x)
+
         x = layers.BatchNormalization()(x)
         x = layers.Activation("relu")(x)
 
@@ -91,10 +96,12 @@ class Classificator:
         return score
 
     def getOccupiedPlacesCount(
-        self,
-        regions: pd.DataFrame = pd.read_csv('../test_data/coords.csv', sep=';'), 
-        img: numpy.ndarray = image.imread('../test_data/image.jpg', cv2.IMREAD_COLOR), 
-        threshold: float = 0.5) -> int:
+            self,
+            regions: pd.DataFrame = pd.read_csv(
+                '../test_data/coords.csv', sep=';'),
+            img: numpy.ndarray = image.imread(
+                '../test_data/image.jpg', cv2.IMREAD_COLOR),
+            threshold: float = 0.5) -> int:
         """
         Возвращает количество занятых мест на парковке
         :param img:  ndarray с фотографией парковки
@@ -112,14 +119,15 @@ class Classificator:
         occupiedCount = 0
         for i in result:
             if i < threshold:
-                occupiedCount+=1
+                occupiedCount += 1
         return occupiedCount
 
 
 # Usage example
-if __name__=="__main__":
-    classificator = Classificator((150,150), MODEL_WEIGHTS_FILE)
-    
+if __name__ == "__main__":
+    classificator = Classificator((150, 150), MODEL_WEIGHTS_FILE)
+
     bigImg = image.imread('../test_data/image.jpg', cv2.IMREAD_COLOR)
     regions = pd.read_csv('../test_data/coords.csv', sep=';')
-    print(f"[log] : {classificator.getOccupiedPlacesCount(regions, bigImg)} out of {regions.shape[0]} are busy")
+    print(
+        f"[log] : {classificator.getOccupiedPlacesCount(regions, bigImg)} out of {regions.shape[0]} are busy")
