@@ -8,6 +8,9 @@ from matplotlib import image
 from utility_crop import crop
 from utility_crop import scale
 
+import random
+import math
+
 IMG_SIZE = (150, 150)
 MODEL_WEIGHTS_FILE = "./model_weights.h5"
 
@@ -126,8 +129,10 @@ class Classificator:
 # Usage example
 if __name__ == "__main__":
     classificator = Classificator((150, 150), MODEL_WEIGHTS_FILE)
-
-    bigImg = image.imread('../test_data/image.jpg', cv2.IMREAD_COLOR)
+    bigImg = image.imread(
+        f'../test_data/test_images/{random.choice(range(1,14))}.jpg', cv2.IMREAD_COLOR)
     regions = pd.read_csv('../test_data/coords.csv', sep=';')
-    print(
-        f"[log] : {classificator.getOccupiedPlacesCount(regions, bigImg)} out of {regions.shape[0]} are busy")
+    result = classificator.getOccupiedPlacesCount(regions, bigImg)
+    overall_places = regions.shape[0]
+    # print(f"{result}/{regions.shape[0]} are busy")
+    print(math.ceil((result/regions.shape[0]) * 9))
