@@ -1,0 +1,224 @@
+[
+    {
+        "image": "\u041f\u0430\u0440\u043a\u043e\u0432\u043a\u0430_\u0420\u0418\u041e_2022_09_07.png",
+        "verified": false,
+        "annotations": [
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 492.3888888888888,
+                    "y": 390.2606837606837,
+                    "width": 90.0,
+                    "height": 126.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 622.8888888888888,
+                    "y": 408.2606837606837,
+                    "width": 87.0,
+                    "height": 130.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 377.8888888888888,
+                    "y": 378.7606837606837,
+                    "width": 95.0,
+                    "height": 99.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 276.8888888888888,
+                    "y": 360.2606837606837,
+                    "width": 93.0,
+                    "height": 100.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 184.3888888888888,
+                    "y": 356.7606837606837,
+                    "width": 74.0,
+                    "height": 89.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 151.8888888888888,
+                    "y": 330.2606837606837,
+                    "width": 59.0,
+                    "height": 70.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 90.3888888888888,
+                    "y": 309.7606837606837,
+                    "width": 46.0,
+                    "height": 65.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 173.8888888888888,
+                    "y": 207.76068376068375,
+                    "width": 31.0,
+                    "height": 27.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 210.8888888888888,
+                    "y": 205.26068376068375,
+                    "width": 27.0,
+                    "height": 26.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 253.8888888888888,
+                    "y": 208.26068376068375,
+                    "width": 39.0,
+                    "height": 40.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 313.8888888888888,
+                    "y": 210.26068376068375,
+                    "width": 33.0,
+                    "height": 44.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 361.3888888888888,
+                    "y": 212.26068376068375,
+                    "width": 46.0,
+                    "height": 58.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 398.8888888888888,
+                    "y": 210.76068376068372,
+                    "width": 39.0,
+                    "height": 64.99999999999997
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 445.8888888888888,
+                    "y": 218.76068376068375,
+                    "width": 59.0,
+                    "height": 59.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 495.8888888888888,
+                    "y": 216.26068376068375,
+                    "width": 55.0,
+                    "height": 50.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 545.8888888888888,
+                    "y": 231.26068376068372,
+                    "width": 55.0,
+                    "height": 49.99999999999997
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 592.3888888888888,
+                    "y": 235.26068376068372,
+                    "width": 54.0,
+                    "height": 47.99999999999997
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 634.3888888888888,
+                    "y": 231.26068376068372,
+                    "width": 54.0,
+                    "height": 49.99999999999997
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 434.8888888888888,
+                    "y": 161.26068376068375,
+                    "width": 27.0,
+                    "height": 30.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 467.8888888888888,
+                    "y": 163.26068376068375,
+                    "width": 27.0,
+                    "height": 26.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 514.3888888888888,
+                    "y": 172.76068376068375,
+                    "width": 42.0,
+                    "height": 31.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 565.3888888888888,
+                    "y": 171.26068376068375,
+                    "width": 40.0,
+                    "height": 38.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 807.8888888888888,
+                    "y": 194.26068376068375,
+                    "width": 53.0,
+                    "height": 46.0
+                }
+            },
+            {
+                "label": "parking lot",
+                "coordinates": {
+                    "x": 805.8888888888888,
+                    "y": 259.2606837606837,
+                    "width": 49.0,
+                    "height": 51.99999999999997
+                }
+            }
+        ]
+    }
+]

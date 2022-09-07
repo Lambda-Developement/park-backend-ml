@@ -5,8 +5,9 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 from matplotlib import image
-from utility_crop import crop
-from utility_crop import scale
+from image_tools.utility_crop import crop
+from image_tools.utility_crop import scale
+from PIL import Image
 
 import random
 import math
@@ -98,41 +99,43 @@ class Classificator:
         score = predictions[0]
         return score
 
-    def getOccupiedPlacesCount(
-            self,
-            regions: pd.DataFrame = pd.read_csv(
-                '../test_data/coords.csv', sep=';'),
-            img: numpy.ndarray = image.imread(
-                '../test_data/image.jpg', cv2.IMREAD_COLOR),
-            threshold: float = 0.5) -> int:
-        """
-        Возвращает количество занятых мест на парковке
-        :param img:  ndarray с фотографией парковки
-        :param regions: массив с данными о разметке парковки
-        :param threshold: порог по которому определяется, что парковка занята.
-        :return: int - кол-во занятых паркомест на изображении.
-        """
-        result = []
-        bigImg = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        for region in regions.iterrows():
-            placeImg = crop(bigImg, regions, region[1]["SlotId"])
-            placeImg = scale(placeImg)
-            placeImg = cv2.cvtColor(placeImg, cv2.COLOR_BGR2RGB)
-            result.append(self.make_prediction(placeImg))
-        occupiedCount = 0
-        for i in result:
-            if i < threshold:
-                occupiedCount += 1
-        return occupiedCount
+    # def getOccupiedPlacesCount(
+    #         self,
+    #         regions: pd.DataFrame = pd.read_csv(
+    #             '../test_data/coords.csv', sep=';'),
+    #         img: numpy.ndarray = image.imread(
+    #             '../test_data/image.jpg', cv2.IMREAD_COLOR),
+    #         threshold: float = 0.5) -> int:
+    #     """
+    #     Возвращает количество занятых мест на парковке
+    #     :param img:  ndarray с фотографией парковки
+    #     :param regions: массив с данными о разметке парковки
+    #     :param threshold: порог по которому определяется, что парковка занята.
+    #     :return: int - кол-во занятых паркомест на изображении.
+    #     """
+    #     result = []
+    #     bigImg = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    #     for region in regions.iterrows():
+    #         placeImg = crop(bigImg, regions, region[1]["SlotId"])
+    #         placeImg = scale(placeImg)
+    #         placeImg = cv2.cvtColor(placeImg, cv2.COLOR_BGR2RGB)
+    #         result.append(self.make_prediction(placeImg))
+    #     occupiedCount = 0
+    #     for i in result:
+    #         if i < threshold:
+    #             occupiedCount += 1
+    #     return occupiedCount
 
 
 # Usage example
-if __name__ == "__main__":
-    classificator = Classificator((150, 150), MODEL_WEIGHTS_FILE)
-    bigImg = image.imread(
-        f'../test_data/test_images/{random.choice(range(1,14))}.jpg', cv2.IMREAD_COLOR)
-    regions = pd.read_csv('../test_data/coords.csv', sep=';')
-    result = classificator.getOccupiedPlacesCount(regions, bigImg)
-    overall_places = regions.shape[0]
-    # print(f"{result}/{regions.shape[0]} are busy")
-    print(math.ceil((result/regions.shape[0]) * 9))
+# if __name__ == "__main__":
+#     classificator = Classificator((150, 150), MODEL_WEIGHTS_FILE)
+#     filename =  f'../test_data/test_images/{random.choice(range(1,14))}.jpg'
+#     bigImg = image.imread(filename, cv2.IMREAD_COLOR)
+#     regions = pd.read_csv('../test_data/coords.csv', sep=';')
+#     result = classificator.getOccupiedPlacesCount(regions, bigImg)
+#     overall_places = regions.shape[0]
+#     # print(f"{result}/{regions.shape[0]} are busy")
+#     print(filename)
+#     print(math.ceil((result/regions.shape[0]) * 9))
+#     Image.open(filename).show()
